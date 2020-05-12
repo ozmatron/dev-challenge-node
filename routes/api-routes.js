@@ -77,66 +77,28 @@ module.exports = function(app) {
     db.Images.findAll({ where: { user_id: req.params.id } }).then(images => res.json(images));
   });
 
-  // app.post('/api/image', function(req, res) {
-  //   db.Images.create({ filename: req.body.filname, user_id: req.body.user_id }).then(function(image) {
-  //     res.json(image);
-  //   });
-  // });
-
-      // configure storage
       const storage = multer.diskStorage({
         destination: (req, file, cb) => {
-          /*
-            Files will be saved in the 'uploads' directory. Make
-            sure this directory already exists!
-          */
           cb(null, './client/src/uploads');
         },
         filename: (req, file, cb) => {
           var userId = req.body['userId']
           console.log(req.body['userId'])
-          /*
-            uuidv4() will generate a random ID that we'll use for the
-            new filename. We use path.extname() to get
-            the extension from the original file name and add that to the new
-            generated ID. These combined will create the file name used
-            to save the file on the server and will be available as
-            req.file.pathname in the router handler.
-          */
+            
           const newFilename = `${uuidv4()}${path.extname(file.originalname)}`;
           cb(null, newFilename);
           db.Images.create({ filename: newFilename, user_id: userId }).then(function(image) {
-            // res.json(image);
           });
-          // }
-          // addImgToDb(newFilename,userId)
+
         },
       });
-      // create the multer instance that will be used to upload/save the file
       const upload = multer({ storage });
-  
-      // const app = express();
-  
+    
       app.use(bodyParser.json());
       app.use(bodyParser.urlencoded({ extended: true }));
   
       app.post('/api/upload', upload.single('selectedFile'), (req, res) => {
-        // userId = req.body['userId']
-        // console.log(userId)
-        
-        /*
-          We now have a new req.file object here. At this point the file has been saved
-          and the req.file.filename value will be the name returned by the
-          filename() function defined in the diskStorage configuration. Other form fields
-          are available here in req.body.
-        */
-        // console.log(res.status)
         res.send();
       });
 
-    //   function addImgToDb(filename,userId) {
-    //     db.Images.create({ filename: filename, user_id: userId }).then(function(image) {
-    //       res.json(image);
-    //     });
-    // }
 };
