@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "therapy_box",
-    "host": "127.0.0.1",
+    "username": "b7e2437887xxxa",
+    "password": "0200xxx6",
+    "database": "heroku_7643ec736354xxx",
+    "host": "us-cdbr-iron-east-02.cleardb.net",
     "dialect": "mysql",
     "operatorsAliases": false
   },
