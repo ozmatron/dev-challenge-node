@@ -21,3 +21,5 @@ db.sequelize.sync().then(function() {
     console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
 });
+
+module.exports = app

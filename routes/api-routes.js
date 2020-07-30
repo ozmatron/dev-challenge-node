@@ -8,9 +8,9 @@ const uuidv4 = require('uuid/v4');
 module.exports = function(app) {
 
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-
     res.json("/members");
   });
+
   app.post("/api/signup", function(req, res) {
     console.log(req.body);
     db.User.create({
@@ -79,7 +79,8 @@ module.exports = function(app) {
 
       const storage = multer.diskStorage({
         destination: (req, file, cb) => {
-          cb(null, './client/src/uploads');
+          cb(null, './assets/uploads');
+      // cb(null, '../therapy-client/src/uploads');
         },
         filename: (req, file, cb) => {
           var userId = req.body['userId']
